@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -35,8 +36,9 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 */
 
 	BufferedImage backgroundImage;
-
-
+	JFrame frame = new JFrame("The Magic Box contains many secrets...");
+	int clickC = 0;
+	JLabel label = new JLabel("1");
 	@Override
 	public void run() {
 		try {
@@ -48,12 +50,12 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.addMouseListener(this);
 	}
 
 	private void loadBackgroundImage() throws Exception {
@@ -79,7 +81,24 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		//System.out.println(backgroundImage.getRGB(e.getX(), e.getY())); 
+		System.out.println("X: "+e.getX()+" Y: "+e.getY());
+		MediaPalace a = new MediaPalace();
+
+		if(e.getX() > 68 && e.getY() > 90 && e.getX() < 81 && e.getY() < 106) {
+			frame.add(label);
+			if(clickC == 0)a.speak("Do not click me again, or else...");
+			else if(clickC == 1)a.speak("I said do not click me");
+			else if(clickC == 2)a.speak("It tickles");
+			else if(clickC == 3)a.speak("Im leaving");
+
+
+			clickC++;
+			
+		}else if(e.getX() > 336 && e.getY() > 616 && e.getX() < 362 && e.getY() < 673) {
+			a.speak("The door is locked...");
+		}
+
 	}
 
 	@Override
