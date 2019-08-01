@@ -45,7 +45,9 @@ public class Runner {
 				Flower flower = new Flower();
 				Location loc = new Location(i, j);
 				//a.getGrid().
-				if(loc != d || loc != d1) {
+				System.out.println(a.getGrid().getOccupiedLocations());
+				//d.getCol() 
+				if(a.getGrid().get(loc) != a.getGrid().get(d) && a.getGrid().get(loc) != a.getGrid().get(d1)) {
 					a.add(loc, flower);
 				}
 				
