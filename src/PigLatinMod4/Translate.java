@@ -1,25 +1,35 @@
 package PigLatinMod4;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class Translate {
+public class Translate implements ActionListener {
 	
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	
-	JButton translate = new JButton();
+	JButton translateB = new JButton("Translate!");
+	JTextField originalText = new JTextField(15);
+	JTextField translation = new JTextField(15);
+	
+	
 	
 	public void GUI() {
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		panel.add(originalText);
+		panel.add(translateB);
+		panel.add(translation);
 		
-		
-		
-		
+		frame.pack();
+		translateB.addActionListener(this);
 		
 	}
 	
@@ -91,5 +101,18 @@ public class Translate {
 				return i;
 		return 0;
 	}
+
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+			if(e.getSource() == translateB) {
+				translation.setText(translate(originalText.getText()));
+				
+			}
+	}
+	
 
 }
